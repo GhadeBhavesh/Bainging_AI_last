@@ -158,7 +158,10 @@ class _SignInPageState extends State<SignInPage> {
                               context,
                               MaterialPageRoute(
                                   builder: (context) => RegisterPage())),
-                          child: Text('Create an Account'),
+                          child: Text(
+                            'Create an Account',
+                            style: TextStyle(color: Colors.white),
+                          ),
                         ),
                       ],
                     ),
@@ -294,7 +297,9 @@ class _RegisterPageState extends State<RegisterPage> {
                               TextSpan(
                                   text: "Already have a account ? ",
                                   style: TextStyle(color: Colors.white)),
-                              TextSpan(text: " login", style: TextStyle()),
+                              TextSpan(
+                                  text: " login",
+                                  style: TextStyle(color: Colors.white)),
                             ])))
                       ],
                     ),
@@ -315,12 +320,15 @@ class HomePage extends StatelessWidget {
     return Scaffold(
         appBar: AppBar(
           backgroundColor: Color.fromARGB(206, 13, 13, 199),
-          title: Text('Home'),
+          title: Text('Home', style: TextStyle(color: Colors.white)),
           // Add hamburger menu icon to the AppBar
           leading: Builder(
             builder: (BuildContext context) {
               return IconButton(
-                icon: Icon(Icons.menu),
+                icon: Icon(
+                  Icons.menu,
+                  color: Colors.white,
+                ),
                 onPressed: () {
                   Scaffold.of(context).openDrawer(); // Open the drawer
                 },

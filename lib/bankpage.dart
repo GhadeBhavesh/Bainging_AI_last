@@ -103,7 +103,10 @@ class _BankPageState extends State<BankPage> {
             leading: Builder(
               builder: (BuildContext context) {
                 return IconButton(
-                  icon: Icon(Icons.menu),
+                  icon: Icon(
+                    Icons.menu,
+                    color: Colors.white,
+                  ),
                   onPressed: () {
                     Scaffold.of(context).openDrawer(); // Open the drawer
                   },

@@ -38,11 +38,14 @@ class _SupportPageState extends State<SupportPage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Color.fromARGB(206, 13, 13, 199),
-        title: Text('Bank Support'),
+        title: Text('Bank Support', style: TextStyle(color: Colors.white)),
         leading: Builder(
           builder: (BuildContext context) {
             return IconButton(
-              icon: Icon(Icons.menu),
+              icon: Icon(
+                Icons.menu,
+                color: Colors.white,
+              ),
               onPressed: () {
                 Scaffold.of(context).openDrawer(); // Open the drawer
               },
@@ -177,7 +180,10 @@ class _SupportPageState extends State<SupportPage> {
                   "Conversation builder error occurred : " + error.toString());
             });
           },
-          icon: Icon(Icons.help),
+          icon: Icon(
+            Icons.help,
+            color: Colors.white,
+          ),
         ),
         backgroundColor: Colors.blue,
       ),
