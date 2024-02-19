@@ -167,7 +167,7 @@ class _SupportPageState extends State<SupportPage> {
           onPressed: () async {
             KommunicateFlutterPlugin.openConversations();
             dynamic conversationObject = {
-              'appId': "366ac44fa07a1a7fe1ebdbdbce64a6d53"
+              'appId': "3692117feb9e94c821773fffea257ccbf"
             };
             KommunicateFlutterPlugin.buildConversation(conversationObject)
                 .then((result) {
