@@ -8,7 +8,7 @@ class TransactionModel {
   String changePercentageIndicator;
   String changePercentage;
   Color color;
-
+  // String description;
   TransactionModel({
     required this.avatar,
     required this.changePercentage,
@@ -17,62 +17,45 @@ class TransactionModel {
     required this.month,
     required this.name,
     required this.color,
+    // required this.description,
   });
 }
 
 List<TransactionModel> myTransactions = [
   TransactionModel(
-    avatar: "assets/icons/avatar1.png",
-    currentBalance: "\₹5482",
+    avatar: "assets/icons/avatar5.png",
+    currentBalance: "4 times Transation",
     changePercentage: "0.41%",
     changePercentageIndicator: "up",
-    month: "Jan",
-    name: "Supreme ",
+    month: "Dad",
+    name: "Shivam Thakur",
     color: Colors.green,
   ),
   TransactionModel(
-    avatar: "assets/icons/avatar2.png",
-    currentBalance: "\₹4252",
+    avatar: "assets/icons/avatar.png",
+    currentBalance: "3 times Transation",
     changePercentageIndicator: "down",
     changePercentage: "4.54%",
-    month: "Mar",
-    name: "Jane Doe",
+    month: "Mom",
+    name: "Sakshi Thakur",
     color: Colors.orange,
   ),
   TransactionModel(
-    avatar: "assets/icons/avatar3.png",
-    currentBalance: "\₹4052",
+    avatar: "assets/icons/avatar5.png",
+    currentBalance: "2 times Transation",
     changePercentage: "1.27%",
     changePercentageIndicator: "down",
-    month: "Mar",
-    name: "Alex Doe",
+    month: "Brother",
+    name: "Soham Thakur",
     color: Colors.red,
   ),
   TransactionModel(
-    avatar: "assets/icons/avatar4.png",
-    currentBalance: "\₹5052",
+    avatar: "assets/icons/avatar.png",
+    currentBalance: "1 times Transation",
     changePercentageIndicator: "up",
     changePercentage: "3.09%",
-    month: "Mar",
-    name: "Sam Doe",
+    month: "Sister",
+    name: "Sonali Thakur",
     color: Colors.deepPurple,
-  ),
-  TransactionModel(
-    avatar: "assets/icons/avatar1.png",
-    currentBalance: "\₹5482",
-    changePercentage: "0.41%",
-    changePercentageIndicator: "up",
-    month: "Jan",
-    name: "Supreme Leader",
-    color: Colors.green,
-  ),
-  TransactionModel(
-    avatar: "assets/icons/avatar2.png",
-    currentBalance: "\₹4252",
-    changePercentageIndicator: "down",
-    changePercentage: "4.54%",
-    month: "Mar",
-    name: "Jane Doe",
-    color: Colors.orange,
   ),
 ];

@@ -1,9 +1,125 @@
+import 'dart:async';
+import 'dart:ffi';
+import 'package:ai/bankpage.dart';
+import 'package:ai/support.dart';
+import 'package:ai/widgets/transaction_card.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
+
+import '../data/transaction_data.dart';
 import 'package:ai/support.dart';
 import 'package:ai/widgets/transion.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-
+import 'package:firebase_database/firebase_database.dart';
 import 'main.dart';
+import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+
+// class BalancePage extends StatefulWidget {
+//   @override
+//   _BalancePageState createState() => _BalancePageState();
+// }
+
+// class _BalancePageState extends State<BalancePage> {
+//   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+//   int balance = 10000;
+//   int transferAmount = 0;
+
+//   @override
+//   void initState() {
+//     super.initState();
+//     _fetchBalance();
+//   }
+
+//   void _fetchBalance() async {
+//     try {
+//       DocumentSnapshot snapshot =
+//           await _firestore.collection('balances').doc('user1').get();
+//       if (snapshot.exists) {
+//         setState(() {
+//           // balance = snapshot.data() != null
+//           //     ? (snapshot.data()['balance'] ?? 10000)
+//           //     : 10000;
+//         });
+//       }
+//     } catch (e) {
+//       print("Error fetching balance: $e");
+//     }
+//   }
+
+//   void _transferMoney(int amount) async {
+//     if (balance >= amount) {
+//       setState(() {
+//         balance -= amount;
+//       });
+//       await _firestore
+//           .collection('balances')
+//           .doc('user1')
+//           .update({'balance': balance});
+//     } else {
+//       // Show some error message or handle insufficient balance
+//     }
+//   }
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       appBar: AppBar(
+//         title: Text('Balance Page'),
+//       ),
+//       body: Center(
+//         child: Column(
+//           mainAxisAlignment: MainAxisAlignment.center,
+//           children: [
+//             Text(
+//               'Balance: $balance',
+//               style: TextStyle(fontSize: 24),
+//             ),
+//             SizedBox(height: 20),
+//             TextField(
+//               keyboardType: TextInputType.number,
+//               onChanged: (value) {
+//                 setState(() {
+//                   transferAmount = int.tryParse(value) ?? 0;
+//                 });
+//               },
+//               decoration: InputDecoration(
+//                 labelText: 'Enter amount to transfer',
+//                 border: OutlineInputBorder(),
+//               ),
+//             ),
+//             SizedBox(height: 20),
+//             ElevatedButton(
+//               onPressed: () {
+//                 _transferMoney(transferAmount);
+//               },
+//               child: Text('Transfer Money'),
+//             ),
+//             SizedBox(height: 20),
+//             Text(
+//               'Users:',
+//               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+//             ),
+//             // List of users to whom you can transfer money
+//             // Replace this with your actual user list from Firebase
+//             ListTile(
+//               leading: CircleAvatar(
+//                 // Replace with user's logo or image from Firebase
+//                 child: Icon(Icons.person),
+//               ),
+//               title: Text('User 1'),
+//               onTap: () {
+//                 _transferMoney(100); // Example: Transfer $100 to User 1
+//               },
+//             ),
+//             // Add more ListTile widgets for additional users
+//           ],
+//         ),
+//       ),
+//     );
+//   }
+// }
 
 class Transfer {
   final String recipient;
@@ -21,6 +137,10 @@ class BankPage extends StatefulWidget {
 
 class _BankPageState extends State<BankPage> {
   final FirebaseAuth _auth = FirebaseAuth.instance;
+  final DatabaseReference _userBalanceRef =
+      FirebaseDatabase.instance.reference().child('user_balances');
+
+  // final FirebaseAuth _auth = FirebaseAuth.instance;
   void _signOut() async {
     await _auth.signOut();
   }
@@ -39,23 +159,6 @@ class _BankPageState extends State<BankPage> {
 
   TextEditingController _amountController =
       TextEditingController(); // Controller for the amount input
-
-  void _sendMoney(UserAccount fromUser, UserAccount toUser, double amount) {
-    setState(() {
-      if (fromUser.balance >= amount) {
-        fromUser.balance -= amount;
-        toUser.balance += amount;
-        transferHistory.add(Transfer(
-          toUser.name,
-          amount,
-          DateTime.now(),
-          toUser.profilePictureUrl,
-        ));
-        _amountController
-            .clear(); // Clear the amount input field after sending money
-      }
-    });
-  }
 
   void _showAccountSelectionDialog(BuildContext context) {
     showDialog(
@@ -93,6 +196,43 @@ class _BankPageState extends State<BankPage> {
   @override
   Widget build(BuildContext context) {
     User? currentUser = _auth.currentUser;
+
+    void _updateUserBalance(double newBalance) {
+      _userBalanceRef.child(currentUser!.uid).set(newBalance);
+    }
+
+    void _getUserBalance() {
+      _userBalanceRef
+          .child(currentUser!.uid)
+          .once()
+          .then((DataSnapshot snapshot) {
+            if (snapshot.value != null) {
+              setState(() {
+                user1.balance = double.parse(snapshot.value.toString());
+              });
+            }
+          } as FutureOr Function(DatabaseEvent value));
+    }
+
+    void _sendMoney(UserAccount fromUser, UserAccount toUser, double amount) {
+      setState(() {
+        if (fromUser.balance >= amount) {
+          fromUser.balance -= amount;
+          toUser.balance += amount;
+          transferHistory.add(Transfer(
+            toUser.name,
+            amount,
+            DateTime.now(),
+            toUser.profilePictureUrl,
+          ));
+          _amountController.clear();
+
+          // Update balance in Firebase after sending money
+          _updateUserBalance(fromUser.balance);
+        }
+      });
+    }
+
     return Scaffold(
         appBar: AppBar(
             backgroundColor: Color.fromARGB(206, 13, 13, 199),
@@ -123,8 +263,8 @@ class _BankPageState extends State<BankPage> {
                 accountName: Text(currentUser?.displayName ?? ""),
                 accountEmail: Text(currentUser?.email ?? ""),
                 currentAccountPicture: CircleAvatar(
-                  backgroundImage: NetworkImage(currentUser?.photoURL ??
-                      "https://th.bing.com/th/id/OIP.L8bs33mJBAUBA01wBfJnjQHaHa?pid=ImgDet&rs=1"),
+                  backgroundImage: AssetImage(
+                      currentUser?.photoURL ?? "assets/profile_image.png"),
                 ),
               ),
               ListTile(
@@ -155,7 +295,7 @@ class _BankPageState extends State<BankPage> {
                   // Navigate to Contact Page
                   Navigator.pop(context);
                   Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => Transaction()));
+                      MaterialPageRoute(builder: (context) => Transactions()));
                 },
               ),
               ListTile(

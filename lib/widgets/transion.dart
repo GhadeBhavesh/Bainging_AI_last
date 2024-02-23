@@ -8,14 +8,14 @@ import '../data/transaction_data.dart';
 import '../main.dart';
 import '../screens/card_screen.dart';
 
-class Transaction extends StatefulWidget {
-  const Transaction({super.key});
+class Transactions extends StatefulWidget {
+  const Transactions({super.key});
 
   @override
-  State<Transaction> createState() => _TransactionState();
+  State<Transactions> createState() => _TransactionsState();
 }
 
-class _TransactionState extends State<Transaction> {
+class _TransactionsState extends State<Transactions> {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   void _signOut() async {
     await _auth.signOut();
@@ -56,8 +56,8 @@ class _TransactionState extends State<Transaction> {
                 accountName: Text(currentUser?.displayName ?? ""),
                 accountEmail: Text(currentUser?.email ?? ""),
                 currentAccountPicture: CircleAvatar(
-                  backgroundImage: NetworkImage(currentUser?.photoURL ??
-                      "https://th.bing.com/th/id/OIP.L8bs33mJBAUBA01wBfJnjQHaHa?pid=ImgDet&rs=1"),
+                  backgroundImage: AssetImage(
+                      currentUser?.photoURL ?? "assets/profile_image.png"),
                 ),
               ),
               ListTile(
@@ -88,7 +88,7 @@ class _TransactionState extends State<Transaction> {
                   // Navigate to Contact Page
                   Navigator.pop(context);
                   Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => Transaction()));
+                      MaterialPageRoute(builder: (context) => Transactions()));
                 },
               ),
               ListTile(

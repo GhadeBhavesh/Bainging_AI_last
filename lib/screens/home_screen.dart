@@ -48,7 +48,7 @@ class HomeScreen extends StatelessWidget {
                   height: 30,
                 ),
                 Text(
-                  "Recent Transactions",
+                  "Favorite Contacts",
                   style: ApptextStyle.BODY_TEXT,
                 ),
                 SizedBox(

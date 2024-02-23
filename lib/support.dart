@@ -63,8 +63,8 @@ class _SupportPageState extends State<SupportPage> {
               accountName: Text(currentUser?.displayName ?? ""),
               accountEmail: Text(currentUser?.email ?? ""),
               currentAccountPicture: CircleAvatar(
-                backgroundImage: NetworkImage(currentUser?.photoURL ??
-                    "https://th.bing.com/th/id/OIP.L8bs33mJBAUBA01wBfJnjQHaHa?pid=ImgDet&rs=1"),
+                backgroundImage: AssetImage(
+                    currentUser?.photoURL ?? "assets/profile_image.png"),
               ),
             ),
             ListTile(
@@ -94,7 +94,7 @@ class _SupportPageState extends State<SupportPage> {
                 // Navigate to Contact Page
                 Navigator.pop(context);
                 Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => Transaction()));
+                    MaterialPageRoute(builder: (context) => Transactions()));
               },
             ),
             ListTile(

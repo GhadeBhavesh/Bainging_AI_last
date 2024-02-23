@@ -81,6 +81,7 @@ class _SignInPageState extends State<SignInPage> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   bool _passwordVisible = false;
+
   Future<void> _signInWithEmailAndPassword() async {
     try {
       final UserCredential userCredential =
@@ -180,9 +181,17 @@ class _RegisterPageState extends State<RegisterPage> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _usernameController = TextEditingController();
+  final TextEditingController _phoneNumberController = TextEditingController();
   bool _passwordVisible = false;
+  bool _phoneNumberError = false;
   Future<void> _registerWithUsernameAndPassword() async {
     try {
+      if (_phoneNumberController.text.length != 10) {
+        setState(() {
+          _phoneNumberError = true;
+        });
+        return;
+      }
       final prefs = await SharedPreferences.getInstance();
       final username = _usernameController.text;
 
@@ -246,13 +255,18 @@ class _RegisterPageState extends State<RegisterPage> {
                           height: 30,
                         ),
                         TextFormField(
+                          controller: _phoneNumberController,
                           decoration: InputDecoration(
-                              filled: true,
-                              fillColor: Colors.white,
-                              prefixIcon:
-                                  const Icon(Icons.phone_android_outlined),
-                              border: const OutlineInputBorder(),
-                              labelText: 'Phone no'),
+                            filled: true,
+                            fillColor: Colors.white,
+                            prefixIcon:
+                                const Icon(Icons.phone_android_outlined),
+                            border: const OutlineInputBorder(),
+                            labelText: 'Phone no',
+                            errorText: _phoneNumberError
+                                ? 'Please enter a 10-digit phone number'
+                                : null,
+                          ),
                         ),
                         SizedBox(
                           height: 20,
@@ -346,8 +360,9 @@ class HomePage extends StatelessWidget {
                 accountName: Text(currentUser?.displayName ?? ""),
                 accountEmail: Text(currentUser?.email ?? ""),
                 currentAccountPicture: CircleAvatar(
-                  backgroundImage: NetworkImage(currentUser?.photoURL ??
-                      "https://th.bing.com/th/id/OIP.L8bs33mJBAUBA01wBfJnjQHaHa?pid=ImgDet&rs=1"),
+                  // radius: 20,
+                  foregroundImage: AssetImage(
+                      currentUser?.photoURL ?? "assets/profile_image.png"),
                 ),
               ),
               ListTile(
@@ -378,7 +393,7 @@ class HomePage extends StatelessWidget {
                   // Navigate to Contact Page
                   Navigator.pop(context);
                   Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => Transaction()));
+                      MaterialPageRoute(builder: (context) => Transactions()));
                 },
               ),
               ListTile(
