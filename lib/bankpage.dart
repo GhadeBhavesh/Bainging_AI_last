@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:ai/support.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -14,17 +16,38 @@ class Bank extends StatefulWidget {
 }
 
 class _BankState extends State<Bank> {
-  int totalBalance = 10000;
+  final FirebaseAuth auth = FirebaseAuth.instance;
+  late User? currentUser = auth.currentUser;
+  int totalBalance = 100000;
   // late User _currentUser;
-  final DatabaseReference _totalBalanceRef =
-      FirebaseDatabase.instance.reference().child('total_balance');
+  late DatabaseReference _totalBalanceRef;
+  // final DatabaseReference _totalBalanceRef =
+  //     FirebaseDatabase.instance.reference().child('total_balance');
 
   @override
   void initState() {
     super.initState();
-    _totalBalanceRef.onValue.listen((event) {
+    _initializeCurrentUser();
+    // _totalBalanceRef.onValue.listen((event) {
+    //   setState(() {
+    //     totalBalance = int.parse(event.snapshot.value.toString());
+    //   });
+    // });
+  }
+
+  void _initializeCurrentUser() {
+    FirebaseAuth.instance.authStateChanges().listen((User? user) {
       setState(() {
-        totalBalance = int.parse(event.snapshot.value.toString());
+        currentUser = user!;
+        _totalBalanceRef = FirebaseDatabase.instance
+            .reference()
+            .child('total_balances')
+            .child(currentUser!.uid);
+        _totalBalanceRef.onValue.listen((event) {
+          setState(() {
+            totalBalance = int.parse(event.snapshot.value.toString());
+          });
+        });
       });
     });
   }
