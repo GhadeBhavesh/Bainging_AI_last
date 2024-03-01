@@ -5,6 +5,8 @@ import 'package:flutter/services.dart';
 import 'package:kommunicate_flutter/kommunicate_flutter.dart';
 
 class Chat extends StatefulWidget {
+  const Chat({super.key});
+
   @override
   _ChatState createState() => _ChatState();
 }
@@ -15,15 +17,15 @@ class _ChatState extends State<Chat> {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          backgroundColor: Color(0xff5c5aa7),
+          backgroundColor: const Color(0xff5c5aa7),
           title: const Text('Kommunicate sample app'),
         ),
-        body: Center(
+        body: const Center(
             child: Text(
           "center",
         )),
         floatingActionButton: FloatingActionButton(
-            child: Icon(Icons.chat),
+            child: const Icon(Icons.chat),
             onPressed: () async {
               KommunicateFlutterPlugin.openConversations();
               dynamic conversationObject = {

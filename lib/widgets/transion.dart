@@ -78,8 +78,8 @@ class _TransactionsState extends State<Transactions> {
                 onTap: () {
                   // Navigate to Contact Page
                   Navigator.pop(context);
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => BankPage()));
+                  Navigator.push(
+                      context, MaterialPageRoute(builder: (context) => Bank()));
                 },
               ),
               ListTile(

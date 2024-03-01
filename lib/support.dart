@@ -7,6 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:kommunicate_flutter/kommunicate_flutter.dart';
 
 class SupportPage extends StatefulWidget {
+  const SupportPage({super.key});
+
   @override
   _SupportPageState createState() => _SupportPageState();
 }
@@ -17,7 +19,7 @@ class _SupportPageState extends State<SupportPage> {
     await _auth.signOut();
   }
 
-  Map<String, String> _questionsAndAnswers = {
+  final Map<String, String> _questionsAndAnswers = {
     'How do I open an account?':
         'To open an account, visit our nearest branch with your valid identification and proof of address.',
     'How can I reset my password?':
@@ -31,18 +33,19 @@ class _SupportPageState extends State<SupportPage> {
   };
 
   String? _selectedQuestion;
-  bool _assistantVisible = false;
+  final bool _assistantVisible = false;
   @override
   Widget build(BuildContext context) {
     User? currentUser = _auth.currentUser;
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color.fromARGB(206, 13, 13, 199),
-        title: Text('Bank Support', style: TextStyle(color: Colors.white)),
+        backgroundColor: const Color.fromARGB(206, 13, 13, 199),
+        title:
+            const Text('Bank Support', style: TextStyle(color: Colors.white)),
         leading: Builder(
           builder: (BuildContext context) {
             return IconButton(
-              icon: Icon(
+              icon: const Icon(
                 Icons.menu,
                 color: Colors.white,
               ),
@@ -54,10 +57,10 @@ class _SupportPageState extends State<SupportPage> {
         ),
       ),
       drawer: Drawer(
-          backgroundColor: Color.fromARGB(206, 13, 13, 199),
+          backgroundColor: const Color.fromARGB(206, 13, 13, 199),
           child: ListView(padding: EdgeInsets.zero, children: <Widget>[
             UserAccountsDrawerHeader(
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 color: Color.fromARGB(206, 13, 13, 199),
               ),
               accountName: Text(currentUser?.displayName ?? ""),
@@ -68,7 +71,7 @@ class _SupportPageState extends State<SupportPage> {
               ),
             ),
             ListTile(
-              title: Text(
+              title: const Text(
                 'Home',
                 style: TextStyle(color: Colors.white),
               ),
@@ -80,31 +83,36 @@ class _SupportPageState extends State<SupportPage> {
               },
             ),
             ListTile(
-              title: Text('Transaction', style: TextStyle(color: Colors.white)),
+              title: const Text('Transaction',
+                  style: TextStyle(color: Colors.white)),
               onTap: () {
                 // Navigate to Contact Page
                 Navigator.pop(context);
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => BankPage()));
+                Navigator.push(
+                    context, MaterialPageRoute(builder: (context) => Bank()));
               },
             ),
             ListTile(
-              title: Text('History', style: TextStyle(color: Colors.white)),
+              title:
+                  const Text('History', style: TextStyle(color: Colors.white)),
               onTap: () {
                 // Navigate to Contact Page
                 Navigator.pop(context);
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => Transactions()));
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const Transactions()));
               },
             ),
             ListTile(
-              title: Text('Support', style: TextStyle(color: Colors.white)),
+              title:
+                  const Text('Support', style: TextStyle(color: Colors.white)),
               onTap: () {
                 // Navigate to Contact Page
                 Navigator.pop(context);
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => SupportPage()),
+                  MaterialPageRoute(builder: (context) => const SupportPage()),
                 );
               },
             ),
@@ -116,11 +124,11 @@ class _SupportPageState extends State<SupportPage> {
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) => SignInPage()));
                   },
-                  child: Text("Logout")),
+                  child: const Text("Logout")),
             ),
           ])),
       body: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           image: DecorationImage(
               image: AssetImage("assets/back.jpg"), fit: BoxFit.cover),
         ),
@@ -133,7 +141,7 @@ class _SupportPageState extends State<SupportPage> {
                 children: [
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Color.fromARGB(255, 29, 101, 209),
+                      backgroundColor: const Color.fromARGB(255, 29, 101, 209),
                       foregroundColor: Colors.white,
                     ),
                     onPressed: () {
@@ -146,18 +154,19 @@ class _SupportPageState extends State<SupportPage> {
                   ),
                   if (_selectedQuestion == question)
                     Container(
-                      padding: EdgeInsets.all(10),
+                      padding: const EdgeInsets.all(10),
                       decoration: BoxDecoration(
                         border: Border.all(
-                            color: Color.fromARGB(255, 252, 252, 252)),
+                            color: const Color.fromARGB(255, 252, 252, 252)),
                         borderRadius: BorderRadius.circular(10),
                       ),
                       child: Text(
                         _questionsAndAnswers[question]!,
-                        style: TextStyle(fontSize: 16, color: Colors.white),
+                        style:
+                            const TextStyle(fontSize: 16, color: Colors.white),
                       ),
                     ),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                 ],
               );
             }).toList(),
@@ -166,6 +175,7 @@ class _SupportPageState extends State<SupportPage> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {},
+        backgroundColor: Colors.blue,
         child: IconButton(
           onPressed: () async {
             KommunicateFlutterPlugin.openConversations();
@@ -174,18 +184,16 @@ class _SupportPageState extends State<SupportPage> {
             };
             KommunicateFlutterPlugin.buildConversation(conversationObject)
                 .then((result) {
-              print("Conversation builder success : " + result.toString());
+              print("Conversation builder success : $result");
             }).catchError((error) {
-              print(
-                  "Conversation builder error occurred : " + error.toString());
+              print("Conversation builder error occurred : $error");
             });
           },
-          icon: Icon(
+          icon: const Icon(
             Icons.help,
             color: Colors.white,
           ),
         ),
-        backgroundColor: Colors.blue,
       ),
     );
   }

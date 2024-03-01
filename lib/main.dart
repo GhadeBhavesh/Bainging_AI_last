@@ -7,6 +7,7 @@ import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:ai/widgets/transaction_card.dart';
 import 'package:ai/widgets/transion.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -92,7 +93,40 @@ class _SignInPageState extends State<SignInPage> {
       Navigator.push(
           context, MaterialPageRoute(builder: (context) => HomePage()));
     } catch (e) {
-      print("Sign-in error: $e");
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          backgroundColor: Colors.transparent,
+          content: Stack(children: [
+            Container(
+              padding: EdgeInsets.all(10),
+              height: 90,
+              decoration: BoxDecoration(
+                color: Color.fromARGB(255, 169, 28, 18),
+                borderRadius: BorderRadius.all(Radius.circular(20)),
+              ),
+              child: Row(children: [
+                SizedBox(
+                  width: 40,
+                ),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "Error",
+                        style: TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.w600),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Text("The user is not logged"),
+                    ],
+                  ),
+                ),
+              ]),
+            ),
+          ])));
+      // print("Sign-in error: $e");
     }
   }
 
@@ -205,7 +239,39 @@ class _RegisterPageState extends State<RegisterPage> {
       Navigator.push(
           context, MaterialPageRoute(builder: (context) => HomePage()));
     } catch (e) {
-      print("Registration error: $e");
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          backgroundColor: Colors.transparent,
+          content: Stack(children: [
+            Container(
+              padding: EdgeInsets.all(10),
+              height: 90,
+              decoration: BoxDecoration(
+                color: Color.fromARGB(255, 87, 9, 4),
+                borderRadius: BorderRadius.all(Radius.circular(20)),
+              ),
+              child: Row(children: [
+                SizedBox(
+                  width: 40,
+                ),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "Error",
+                        style: TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.w600),
+                      ),
+                      Text("The user is already logged!"),
+                    ],
+                  ),
+                ),
+              ]),
+            ),
+// SvgPicture.asset(
+
+// );
+          ])));
     }
   }
 
@@ -383,8 +449,8 @@ class HomePage extends StatelessWidget {
                 onTap: () {
                   // Navigate to Contact Page
                   Navigator.pop(context);
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => BankPage()));
+                  Navigator.push(
+                      context, MaterialPageRoute(builder: (context) => Bank()));
                 },
               ),
               ListTile(
