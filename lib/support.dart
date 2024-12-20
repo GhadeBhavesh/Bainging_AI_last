@@ -1,7 +1,7 @@
-import 'package:ai/bankpage.dart';
-import 'package:ai/ai.dart';
-import 'package:ai/main.dart';
-import 'package:ai/widgets/transion.dart';
+import 'package:ai_assistent/bankpage.dart';
+import 'package:ai_assistent/ai.dart';
+import 'package:ai_assistent/main.dart';
+import 'package:ai_assistent/widgets/transion.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:kommunicate_flutter/kommunicate_flutter.dart';
@@ -180,7 +180,7 @@ class _SupportPageState extends State<SupportPage> {
           onPressed: () async {
             KommunicateFlutterPlugin.openConversations();
             dynamic conversationObject = {
-              'appId': "3692117feb9e94c821773fffea257ccbf"
+              'appId': "272bb1091d69a77adb831e84329b2f6fd"
             };
             KommunicateFlutterPlugin.buildConversation(conversationObject)
                 .then((result) {

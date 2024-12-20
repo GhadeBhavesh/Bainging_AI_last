@@ -1,6 +1,6 @@
-import 'package:ai/bankpage.dart';
-import 'package:ai/support.dart';
-import 'package:ai/widgets/transaction_card.dart';
+import 'package:ai_assistent/bankpage.dart';
+import 'package:ai_assistent/support.dart';
+import 'package:ai_assistent/widgets/transaction_card.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 

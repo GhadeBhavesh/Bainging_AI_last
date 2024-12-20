@@ -29,7 +29,7 @@ class _ChatState extends State<Chat> {
             onPressed: () async {
               KommunicateFlutterPlugin.openConversations();
               dynamic conversationObject = {
-                'appId': "3692117feb9e94c821773fffea257ccbf"
+                'appId': "272bb1091d69a77adb831e84329b2f6fd"
               };
             }),
       ),

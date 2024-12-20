@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ai/constants/color_constants.dart';
+import 'package:ai_assistent/constants/color_constants.dart';
 
 class ApptextStyle {
   static const TextStyle MY_CARD_TITLE =

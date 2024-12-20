@@ -1,9 +1,9 @@
 import 'dart:ffi';
 
-import 'package:ai/support.dart';
+import 'package:ai_assistent/support.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:ai/widgets/transion.dart';
+import 'package:ai_assistent/widgets/transion.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'main.dart';
 import 'package:autocomplete_textfield/autocomplete_textfield.dart';
@@ -40,7 +40,7 @@ class _BankState extends State<Bank> {
       setState(() {
         currentUser = user!;
         _totalBalanceRef = FirebaseDatabase.instance
-            .reference()
+            .ref()
             .child('total_balances')
             .child(currentUser!.uid);
         _totalBalanceRef.onValue.listen((event) {
@@ -57,7 +57,7 @@ class _BankState extends State<Bank> {
       _totalBalanceRef.set(totalBalance - amount);
       // Save transaction data to Firebase
       DatabaseReference transactionRef =
-          FirebaseDatabase.instance.reference().child('transactions');
+          FirebaseDatabase.instance.ref().child('transactions');
       transactionRef.push().set({
         'recipient': recipient,
         'amount': amount,

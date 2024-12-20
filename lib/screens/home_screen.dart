@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:ai/constants/app_textstyle.dart';
-import 'package:ai/constants/color_constants.dart';
-import 'package:ai/data/card_data.dart';
-import 'package:ai/data/transaction_data.dart';
-import 'package:ai/widgets/my_card.dart';
-import 'package:ai/widgets/transaction_card.dart';
+import 'package:ai_assistent/constants/app_textstyle.dart';
+import 'package:ai_assistent/constants/color_constants.dart';
+import 'package:ai_assistent/data/card_data.dart';
+import 'package:ai_assistent/data/transaction_data.dart';
+import 'package:ai_assistent/widgets/my_card.dart';
+import 'package:ai_assistent/widgets/transaction_card.dart';
 
 import '../main.dart';
 

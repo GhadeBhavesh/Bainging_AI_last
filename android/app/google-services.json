@@ -1,26 +1,79 @@
 {
   "project_info": {
-    "project_number": "377738380705",
-    "project_id": "bankapp-86993",
-    "storage_bucket": "bankapp-86993.appspot.com"
+    "project_number": "529748570302",
+    "project_id": "bankingapp-2e734",
+    "storage_bucket": "bankingapp-2e734.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:377738380705:android:46a6c20c8cb959bc64b7e0",
+        "mobilesdk_app_id": "1:529748570302:android:0631b93f5445e64e0ceeef",
         "android_client_info": {
-          "package_name": "com.example.ai"
+          "package_name": "com.example.ai_assistent"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "529748570302-amn24rmjoqbi7lem2gufmnnm013us9ao.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
-          "current_key": "AIzaSyBYNdeWd0mAOQowrZ68soRZddQ4TqVZDcE"
+          "current_key": "AIzaSyAQZBP4tFsIzsZRqXMGsGJAG2UBHnGw61E"
         }
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "529748570302-amn24rmjoqbi7lem2gufmnnm013us9ao.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "529748570302-boh3368lh0e4tukrrg72001n9b26g6sl.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.bankingApp"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:529748570302:android:f4eb3fc3950044170ceeef",
+        "android_client_info": {
+          "package_name": "com.example.banking_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "529748570302-amn24rmjoqbi7lem2gufmnnm013us9ao.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAQZBP4tFsIzsZRqXMGsGJAG2UBHnGw61E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "529748570302-amn24rmjoqbi7lem2gufmnnm013us9ao.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "529748570302-boh3368lh0e4tukrrg72001n9b26g6sl.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.bankingApp"
+              }
+            }
+          ]
         }
       }
     }

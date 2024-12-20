@@ -1,14 +1,14 @@
-import 'package:ai/bankpage.dart';
-import 'package:ai/screens/base_scren.dart';
-import 'package:ai/screens/card_screen.dart';
-import 'package:ai/support.dart';
+import 'package:ai_assistent/bankpage.dart';
+import 'package:ai_assistent/screens/base_scren.dart';
+import 'package:ai_assistent/screens/card_screen.dart';
+import 'package:ai_assistent/support.dart';
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
-import 'package:ai/widgets/transaction_card.dart';
-import 'package:ai/widgets/transion.dart';
+import 'package:ai_assistent/widgets/transaction_card.dart';
+import 'package:ai_assistent/widgets/transion.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'firebase_options.dart';
+
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -29,9 +29,14 @@ void main() async {
   // FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
-  runApp(MyApp());
+    options: FirebaseOptions(
+      apiKey: "AIzaSyAQZBP4tFsIzsZRqXMGsGJAG2UBHnGw61E",
+      appId: "1:529748570302:android:0631b93f5445e64e0ceeef",
+      messagingSenderId: "529748570302",
+      projectId: "bankingapp-2e734",
+    ),
+  ).then((value) => runApp(MyApp()));
+  // runApp(MyApp());
 }
 
 class MyApp extends StatefulWidget {

@@ -1,4 +1,4 @@
-# ai
+# ai_assistent
 
 A new Flutter project.
 

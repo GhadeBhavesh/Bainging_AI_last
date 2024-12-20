@@ -1,6 +1,6 @@
 {
-    "name": "ai",
-    "short_name": "ai",
+    "name": "ai_assistent",
+    "short_name": "ai_assistent",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

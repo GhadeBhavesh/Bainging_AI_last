@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:ai/constants/color_constants.dart';
-import 'package:ai/screens/home_Screen.dart';
+import 'package:ai_assistent/constants/color_constants.dart';
+import 'package:ai_assistent/screens/home_Screen.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'card_screen.dart';

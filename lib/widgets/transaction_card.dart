@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:ai/constants/app_textstyle.dart';
-import 'package:ai/data/transaction_data.dart';
+import 'package:ai_assistent/constants/app_textstyle.dart';
+import 'package:ai_assistent/data/transaction_data.dart';
 import 'dart:ui' as ui;
 
 class TransactionCard extends StatelessWidget {

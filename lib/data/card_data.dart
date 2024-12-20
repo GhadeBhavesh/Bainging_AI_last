@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:ai/constants/color_constants.dart';
+import 'package:ai_assistent/constants/color_constants.dart';
 
 class CardModel {
   String cardNumber;
